@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  engineType = "binary"
+  binaryTargets = ["native", "linux-musl"]
 }
 
 datasource db {
@@ -22,7 +22,7 @@ model Client {
 }
 
 model Contact {
-  id        Int      @default(autoincrement()) @id
+  id        String      @default(uuid()) @id
   name     String
   email    String
   owner    Client?    @relation(fields: [ownerId], references: [id])

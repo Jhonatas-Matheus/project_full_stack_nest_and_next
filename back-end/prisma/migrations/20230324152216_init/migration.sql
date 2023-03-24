@@ -12,7 +12,7 @@ CREATE TABLE "Client" (
 
 -- CreateTable
 CREATE TABLE "Contact" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "ownerId" TEXT,

@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  project_full_stack_db:
+    image: postgres
+    env_file: .env
+    ports:
+      - 5435:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+
+  migrations:
+    build: ./back-end
+    command: yarn prisma migrate dev --name init
+    depends_on:
+      project_full_stack_db:
+        condition: service_healthy
+  
+  api:
+    build: ./back-end
+    command: yarn start:dev
+    ports:
+      - 3005:3000
+    depends_on:
+      project_full_stack_db:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully

@@ -6,3 +6,9 @@ export interface IClientResposne {
     name: string;
     phone: string;
 }
+export interface IClientTokenJwt {
+    username: string,
+    sub: string,
+    iat: number,
+    exp: number
+}
