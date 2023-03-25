@@ -1,4 +1,6 @@
-import './globals.css'
+import { Container } from '@/components/container'
+import StyledComponentsRegistry from '@/registry'
+import '../../styles/globalstyle.css'
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,7 +14,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <StyledComponentsRegistry>
+          <Container>
+            {children}
+          </Container>
+        </StyledComponentsRegistry>
+      </body>
     </html>
   )
 }
