@@ -8,7 +8,8 @@ interface IContainerProps {
 export const Container = ({ children }: IContainerProps) => {
     return (
         <StyledContainer>
-            {children}
+            <div className="bg-container"></div>
+            <div className="content">{children}</div>
         </StyledContainer>
     )
 }

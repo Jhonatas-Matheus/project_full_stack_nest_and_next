@@ -1,8 +1,8 @@
 /*eslint-disable */
 export interface IClientResposne {
     id: string;
-    username: string;
     email: string;
+    created_at: Date;
     name: string;
     phone: string;
 }

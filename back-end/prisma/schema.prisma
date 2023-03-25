@@ -12,19 +12,21 @@ datasource db {
 }
 
 model Client {
-  id        String      @default(uuid()) @id
-  username  String      @unique
-  email     String      @unique
-  password  String
-  name      String
-  phone     String
+  id          String        @default(uuid()) @id
+  username    String        @unique
+  created_at  DateTime      @default(now())
+  email       String        @unique
+  password    String
+  name        String
+  phone       String
   contacts     Contact[]
 }
 
 model Contact {
-  id        String      @default(uuid()) @id
+  id       String      @default(uuid()) @id
   name     String
   email    String
+  phone    String
   owner    Client?    @relation(fields: [ownerId], references: [id])
   ownerId  String? 
 }

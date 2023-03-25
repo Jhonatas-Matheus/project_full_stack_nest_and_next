@@ -2,6 +2,7 @@
 CREATE TABLE "Client" (
     "id" TEXT NOT NULL,
     "username" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -15,6 +16,7 @@ CREATE TABLE "Contact" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
     "ownerId" TEXT,
 
     CONSTRAINT "Contact_pkey" PRIMARY KEY ("id")
