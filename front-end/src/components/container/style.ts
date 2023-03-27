@@ -21,7 +21,7 @@ export const StyledContainer = styled.div`
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: auto !important;
     overflow-x: hidden;
     /* background-color: rgba(35,21,255,.3); */
     /* padding-bottom: 5rem; */
