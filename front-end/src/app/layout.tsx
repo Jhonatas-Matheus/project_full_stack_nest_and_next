@@ -1,5 +1,5 @@
-
 import { Container } from '@/components/container'
+import { AuthProvider } from '@/context/AuthContext'
 import StyledComponentsRegistry from '@/registry'
 import '../../styles/globalstyle.css'
 export const metadata = {
@@ -15,11 +15,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StyledComponentsRegistry>
-          <Container>
-            {children}
-          </Container>
-        </StyledComponentsRegistry>
+        <AuthProvider>
+          <StyledComponentsRegistry>
+            <Container>
+              {children}
+            </Container>
+          </StyledComponentsRegistry>
+        </AuthProvider>
       </body>
     </html>
   )

@@ -1,7 +1,7 @@
 "use client"
 import { Form } from "@/components/form";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AnimatePresence, MotionAdvancedProps } from "framer-motion";
 import { useRequest } from "@/hooks/useRequests";
 import { useForm } from "react-hook-form";
@@ -11,18 +11,27 @@ import { IClienteLogin } from "@/interfaces/client.interfaces";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Image from "next/image";
+import { AuthContext } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 
 
 
 
 export default function LoginPage() {
+    const { profile } = useContext(AuthContext)
+    const router = useRouter()
+    if (profile) {
+        router.push('/dashboard')
+        return null
+    }
     const [currentForm, setCurrentForm] = useState<"login" | "register">("login")
     const { hadnleLogin, loading, handleRegister } = useRequest()
     const { register: registerLoginForm, handleSubmit: handleSubmitLoginForm, formState: { errors: errorsLoginForm } } = useForm<ClientLoginFormData>({ resolver: yupResolver(clientLoginSchema) })
     const { register: registerRegisterForm, handleSubmit: handleSubmitRegisterForm, formState: { errors: errorsRegisterForm } } = useForm<ClientRegisterFormData>({ resolver: yupResolver(clientRegisterSchema) })
     const handleOnSubmit = async (data: ClientLoginFormData) => {
         const response = await hadnleLogin(data as IClienteLogin)
+        console.log(response)
     }
     const handleOnSubmitRegister = async (data: ClientRegisterFormData) => {
         const response = await handleRegister(data)

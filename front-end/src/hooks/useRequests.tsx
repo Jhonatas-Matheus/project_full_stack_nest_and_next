@@ -1,18 +1,22 @@
+import { AuthContext } from "@/context/AuthContext"
 import { IClienteLogin, IClientRegister } from "@/interfaces/client.interfaces"
 import { api } from "@/services/api"
 import { handleToastfy } from "@/utils/toastfy.helper"
-import { AxiosError } from "axios"
-import { useState } from "react"
+import axios, { AxiosError } from "axios"
+import { useContext, useState } from "react"
 import { toast } from "react-toastify"
 
 
 
 export const useRequest = () => {
     const [loading, setLoading] = useState<boolean>()
+    const { setProfile, setToken } = useContext(AuthContext)
     const hadnleLogin = async (payload: IClienteLogin) => {
         setLoading(true)
         try {
             const response = await api.post('/client/login', payload)
+            localStorage.setItem('project_full_stack:token', response.data.access_token)
+            setToken(response.data.access_token)
             handleToastfy({ typeToast: "success", text: "Login feito com sucesso" })
             setTimeout(() => {
                 setLoading(false)

@@ -69,6 +69,7 @@ export class ClientController {
     @Get('')
     async getClientById(@Req() req, @Res() res: Response): Promise<Response<IClientResposne>> {
         const jwtData: IClientTokenJwt = req.user
+        console.log(req)
         try {
             const responseData = await this.clientService.findClientById(jwtData.sub)
             return res.status(HttpStatus.OK).json(responseData)
