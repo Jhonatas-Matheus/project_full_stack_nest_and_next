@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }: IAuthContextParams) => {
     const [token, setToken] = useState<string | undefined>()
     const [trigger, setTrigger] = useState<boolean>(false)
     const getProfileOfCurrentClient = async () => {
+        api.defaults.headers.common.Authorization = `Bearer ${token}`
         if (localStorage.getItem('project_full_stack:token')) {
             setToken(localStorage.getItem('project_full_stack:token') as string)
             const response = await api.get('/client', { headers: { Authorization: `Bearer ${token}` } })

@@ -1,14 +1,19 @@
-import Link from "next/link"
 import { StyledNavbar } from "./styles"
 import { AnimatePresence, motion } from 'framer-motion'
 import { useContext, useState } from "react"
 import { AuthContext } from "@/context/AuthContext"
+import { ModalContext } from "@/context/ModalContext"
 
 
 
 export const Navbar = () => {
     const [showOptions, setShowOptions] = useState<boolean>(false)
     const { setToken } = useContext(AuthContext)
+    const handleLogout = () =>{
+        localStorage.removeItem('project_full_stack:token')
+        setToken("")
+    }
+    const {setShowModal, setTypeModal} = useContext(ModalContext)
     return (
         <StyledNavbar>
             <div className="teste">
@@ -19,9 +24,17 @@ export const Navbar = () => {
             </div>
             <div className="options-nav-bar-desktop">
                 <img className="profile-info-img" src="./assets/icon-avatar-default.jpg" alt="" />
-                <span>Editar Perfil</span>
-                <span>Excluir Perfil</span>
-                <span>Logout</span>
+                <span onClick={()=>{
+                    setTypeModal("editProfile")
+                    setShowModal(true)
+                    setShowOptions(false)
+                    }}>Editar Perfil</span>
+                <span onClick={()=>{
+                    setTypeModal("excludeProfile")
+                    setShowModal(true)
+                    setShowOptions(false)
+                    }}>Excluir Perfil</span>
+                <span onClick={handleLogout}>Logout</span>
 
             </div>
             <AnimatePresence>
@@ -29,38 +42,37 @@ export const Navbar = () => {
                     (
                         <motion.div key="navbar" className="options-nav-bar-mobile" initial={{ y: "-100vh" }} animate={{ y: "0" }} exit={{ y: "-100vh" }} transition={{ duration: .5 }}>
                             <div className="profile-info">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img className="profile-info-img" src="./assets/icon-avatar-default.jpg" alt="" />
                                 <h2>JohnDoeUsername</h2>
                                 <h3>Jhon Doe</h3>
                             </div>
                             <div className="btn-control-container">
                                 <div className="btn-single-container">
-                                    <button>
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <button onClick={()=>{
+                                        setTypeModal("editProfile")
+                                        setShowModal(true)
+                                        setShowOptions(false)
+                                        }}>
                                         <img src="./assets/icon-pencil.svg" alt="Ícone referente a edição de perfil." />
                                     </button>
                                     <p>Editar Perfil</p>
                                 </div>
                                 <div className="btn-single-container">
-                                    <button>
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <button onClick={()=>{
+                                        setTypeModal("excludeProfile")
+                                        setShowModal(true)
+                                        setShowOptions(false)
+                                        }}>
                                         <img src="./assets/icon-trash.svg" alt="Ícone referente a exclusão de perfil." />
                                     </button>
                                     <p>Excluir Perfil</p>
                                 </div>
                                 <div className="btn-single-container">
-                                    <button onClick={() => {
-                                        localStorage.removeItem('project_full_stack:token')
-                                        setToken("")
-                                    }}>
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <button onClick={handleLogout}>
                                         <img src="./assets/icon-logout.svg" alt="Ícone referente a logout." />
                                     </button>
                                     <p>Logout</p>
                                 </div>
-
-
                             </div>
                         </motion.div>
                     )

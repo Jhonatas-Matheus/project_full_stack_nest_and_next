@@ -7,6 +7,7 @@ import { useRequest } from "@/hooks/useRequests"
 import { IContactResponse } from "@/interfaces/contact.interfaces"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
+import { ModalEditProfile } from "./components/modal-edit-profile"
 
 
 
@@ -22,6 +23,7 @@ export default function DashboardPage() {
         }
         getListContacts()
     }, [])
+
     if (!profile) {
         router.push('/login')
         return (<h1>Carregando</h1>)
@@ -34,6 +36,7 @@ export default function DashboardPage() {
                     <CardContact cardContact={contact} key={contact.id} id={contact.id} />
                 ))}
             </CardContactContainer>
+            <ModalEditProfile/>
         </>
     )
 }

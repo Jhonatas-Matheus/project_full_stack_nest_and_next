@@ -38,7 +38,6 @@ export default function LoginPage() {
     }
     return (
         <AnimatePresence mode="wait">
-            <ToastContainer />
             {currentForm === "login" ? (
                 <Form key="formLogin" motionConfig={{ initial: { y: -1000, width: "80%", height: "min-content" }, animate: { y: 0, borderRadius: loading ? "50%" : "10px", height: loading ? "100px" : "min-content", width: loading ? "100px" : "80%" }, exit: { y: -1000 } }} onSubmit={handleSubmitLoginForm(handleOnSubmit)}>
                     {!loading ? (

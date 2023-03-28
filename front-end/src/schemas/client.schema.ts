@@ -15,3 +15,13 @@ export const clientLoginSchema = yup.object({
     password: yup.string().required("O campo password é obrigatório")
 })
 export type ClientLoginFormData = yup.InferType<typeof clientLoginSchema>
+
+export const clientEditSchema = yup.object({
+    email: yup.string().email("O campo deve ser um email válido").notRequired().transform((value:string)=> !value? undefined: value),
+    name: yup.string().transform((value:string)=> !value? undefined: value),
+    phone: yup.string().transform((value:string)=> !value? undefined: value),
+    username: yup.string().transform((value:string)=> !value? undefined: value),
+    password: yup.string().min(8).nullable().transform((value: any) => !!value ? value : undefined)
+}).transform((value)=> !value? undefined: value)
+export type ClientEditFormData = yup.InferType<typeof clientEditSchema>
+
