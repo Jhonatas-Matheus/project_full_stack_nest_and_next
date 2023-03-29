@@ -12,7 +12,7 @@ import { StyledExcludeProfile, StyledFormEditProfile } from "./style"
 
 
 
-export const ModalEditProfile = () =>{
+export const ModalProfile = () =>{
     const {typeModal, setShowModal} = useContext(ModalContext)
     const { register: registerEditForm, handleSubmit: handleSubmitEditForm, formState: { errors: errorsEditForm } } = useForm<ClientEditFormData>({ resolver: yupResolver(clientEditSchema) })
     const {handleEditProfile} = useRequest()
@@ -45,9 +45,7 @@ export const ModalEditProfile = () =>{
                     <button>Confirmar</button>
                 </StyledExcludeProfile>
             )
-
             }
-
             </AnimatePresence>
         </ModalGeneric>
     )

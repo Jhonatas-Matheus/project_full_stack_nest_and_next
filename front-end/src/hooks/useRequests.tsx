@@ -8,7 +8,10 @@ import { useContext, useState } from "react"
 import { toast } from "react-toastify"
 
 type TypeRequest = "listAll" | "updateOneById" | "deleteOneById" | "createContact";
-
+interface IConfigRequest{
+    payload?: IContactRequest
+    id?:string
+}
 export const useRequest = () => {
     const [loading, setLoading] = useState<boolean>()
     const { setProfile, setToken, token } = useContext(AuthContext)
@@ -51,7 +54,7 @@ export const useRequest = () => {
             }, 2000)
         }
     }
-    const handleContacts = async (typeRequest: TypeRequest, payload?: IContactRequest, id?: string): Promise<IContactResponse[]> => {
+    const handleContacts = async (typeRequest: TypeRequest, {payload ,id}:IConfigRequest = {}): Promise<IContactResponse[]> => {
         switch (typeRequest) {
             case "listAll":
                 return await (await api.get('/contact')).data
@@ -60,7 +63,7 @@ export const useRequest = () => {
             case "updateOneById":
                 return await (await api.patch(`/contact/${id}`, payload)).data
             case "deleteOneById":
-                return await (await api.patch(`/contact/${id}`, payload)).data
+                return await (await api.delete(`/contact/${id}`)).data
             default:
                 return await (await api.get('/contact')).data
         }
@@ -76,5 +79,11 @@ export const useRequest = () => {
         }
 
     }
-    return { hadnleLogin, loading, handleRegister, handleContacts, handleEditProfile }
+    return {
+      hadnleLogin,
+      loading,
+      handleRegister,
+      handleContacts,
+      handleEditProfile,
+    };
 }

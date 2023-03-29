@@ -63,9 +63,29 @@ padding: 0 1rem;
     flex-direction: column;
     align-items: center;
     gap: .5rem;
+    .profile-info-data{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2{
+            font-size: 1.3rem;
+            color: #1DBBED;
+        }
+        h3{
+            font-size: 1rem;
+        }
+    }
     .profile-info-img{
         width: 8rem;
         height: 8rem;
+        object-fit: scale-down;
+    }
+    @media (min-width: 1024px){
+        height: 100%;
+        .profile-info-img{
+            height: 100%;
+        }
+        flex-direction: row;
     }
 }
 .btn-control-container{
@@ -97,7 +117,6 @@ padding: 0 1rem;
 }
 .options-nav-bar-desktop{
     display: none;
-    /* background-color: red; */
     position: absolute;
     z-index: 3;
     right: 1rem;
@@ -105,11 +124,18 @@ padding: 0 1rem;
         display: flex;
         align-items: center;
         gap: 1rem;
+        height: 100%;
+
             span{
                 font-size: .9rem;
                 font-weight: bold;
                 width: min-content;
                 white-space: nowrap;
+                cursor: pointer;
+                transition: .5s;
+                &:hover{
+                    color: #1DBBED;
+                }
             }
     }
     img{

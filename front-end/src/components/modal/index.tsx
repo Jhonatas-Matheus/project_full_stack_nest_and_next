@@ -1,6 +1,6 @@
 import { ModalContext } from "@/context/ModalContext"
 import { AnimatePresence } from "framer-motion"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { StyledModalGeneric } from "./style"
 
 
@@ -13,13 +13,15 @@ export const ModalGeneric = ({children}: IModalGenericParams) =>{
     return (
       <AnimatePresence>
         {showModal && (
-          <StyledModalGeneric initial={{opacity: 0 }} animate={{opacity: 1}} exit={{opacity:0}}>
+          <StyledModalGeneric
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
             <div
               className="bg-modal"
               onClick={() => {
-                console.log("Pegou o click no bg-modal");
-                setTypeModal("")
-                // setShowModal(false);
+                setTypeModal("");
               }}
             ></div>
             <div className="content">{children}</div>
