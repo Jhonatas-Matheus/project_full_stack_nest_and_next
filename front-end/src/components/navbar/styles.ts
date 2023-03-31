@@ -42,6 +42,7 @@ padding: 0 1rem;
 }
 .icon-nav-bar{
     width: 1.5rem;
+    cursor: pointer;
 }
 .options-nav-bar-mobile{
     position: absolute;
@@ -102,6 +103,7 @@ padding: 0 1rem;
         border: none;
         width: 2.5rem;
         height: 2.5rem;
+        cursor: pointer;
         img{
             width: 50%;
             height: 50%;

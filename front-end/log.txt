@@ -1,0 +1,17 @@
+yarn run v1.22.19
+$ next dev
+[32mready[39m - started server on 0.0.0.0:3000, url: http://localhost:3000
+[33mwarn[39m  - [1mYou have enabled experimental feature (appDir) in next.config.js.[22m
+[33mwarn[39m  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
+
+[36minfo[39m  - Thank you for testing `appDir` please leave your feedback at https://nextjs.link/app-feedback
+(node:236970) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[35mevent[39m - compiled client and server successfully in 1488 ms (262 modules)
+[36mwait[39m  - compiling...
+[35mevent[39m - compiled client and server successfully in 2.1s (262 modules)
+[36mwait[39m  - compiling /page (client and server)...
+[35mevent[39m - compiled client and server successfully in 1713 ms (1252 modules)
+Warning: Each child in a list should have a unique "key" prop. See https://reactjs.org/link/warning-keys for more information.
+[?25h
+Done in 302.98s.

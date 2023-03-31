@@ -18,15 +18,21 @@
     "eslint-config-next": "13.2.4",
     "framer-motion": "^10.9.1",
     "next": "13.2.4",
+    "nookies": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.8",
+    "react-input-mask": "^2.0.4",
+    "react-responsive": "^9.0.2",
     "react-toastify": "^9.1.2",
     "styled-components": "^5.3.9",
     "typescript": "5.0.2",
     "yup": "^1.0.2"
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.26"
+    "@types/react-input-mask": "^3.0.2",
+    "@types/styled-components": "^5.1.26",
+    "@types/warning": "^3.0.0",
+    "warning": "^4.0.3"
   }
 }

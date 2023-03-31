@@ -15,6 +15,9 @@ border-radius: 10px;
     @media (min-width: 768px) {
         width: 60%;
     } 
+    /* @media (min-width: 1280px){
+        width: 40% !important;
+    } */
 h2{
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -31,6 +34,7 @@ input{
 }
 input[type="submit"]{
     background-color: #1DBBED !important;
+    cursor: pointer;
     color: #fff;
     font-weight: bold;
 }

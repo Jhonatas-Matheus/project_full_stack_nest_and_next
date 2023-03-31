@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion"
 import { Dispatch, SetStateAction, useContext } from "react"
 import { useForm } from "react-hook-form"
 import { StyledFormEditContact, StyledFormExcludeContact } from "./style"
-
+import InputMask from 'react-input-mask';
 
 
 interface IModalContactProps{
@@ -61,12 +61,14 @@ export const ModalConact = ({setContacts}: IModalContactProps) =>{
               placeholder="Nome"
             />
             {errosEditForm.name && <p>{errosEditForm.name?.message}</p>}
-            <input
+            <InputMask
               {...registerEditForm("phone")}
               type="text"
               placeholder="Telefone"
+              mask="(99) 9 9999-9999"
             />
             {errosEditForm.phone && <p>{errosEditForm.phone?.message}</p>}
+
             <input
               {...registerEditForm("email")}
               type="text"
@@ -85,11 +87,24 @@ export const ModalConact = ({setContacts}: IModalContactProps) =>{
             onSubmit={handleSubmitCreateForm(handleOnSubmitCreateContact)}
           >
             <h2>Adcionar Contato</h2>
-            <input {...registerCreateForm("name")} type="text" placeholder="Nome" />
+            <input
+              {...registerCreateForm("name")}
+              type="text"
+              placeholder="Nome"
+            />
             {errosCreateForm.name && <p>{errosCreateForm.name.message}</p>}
-            <input {...registerCreateForm("phone")} type="text" placeholder="Telefone" />
+            <InputMask
+              {...registerCreateForm("phone")}
+              type="text"
+              placeholder="Telefone"
+              mask="(99) 9 9999-9999"
+            />
             {errosCreateForm.phone && <p>{errosCreateForm.phone.message}</p>}
-            <input {...registerCreateForm("email")} type="text" placeholder="Email" />
+            <input
+              {...registerCreateForm("email")}
+              type="text"
+              placeholder="Email"
+            />
             {errosCreateForm.email && <p>{errosCreateForm.email.message}</p>}
             <input type="submit" value="Adcionar" />
           </StyledFormEditContact>
@@ -106,7 +121,7 @@ export const ModalConact = ({setContacts}: IModalContactProps) =>{
               Você tem certeza que deseja <span>exluir</span> o contato em
               questão?
             </h2>
-            <button onClick={()=>handleExcludeContact()}>Confirmar</button>
+            <button onClick={() => handleExcludeContact()}>Confirmar</button>
           </StyledFormExcludeContact>
         )}
       </AnimatePresence>

@@ -8,29 +8,38 @@ import { useRequest } from "@/hooks/useRequests"
 import { IContactResponse } from "@/interfaces/contact.interfaces"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
-import { ControlPanel } from "./components/control-panel"
-import { ModalConact } from "./components/modal-contact"
-import { ModalProfile } from "./components/modal-profile"
+import { ControlPanel } from "../../components/control-panel"
+
+import { Loading } from "@/components/loading"
+import { ModalProfile } from "@/components/modal-profile"
+import { ModalConact } from "@/components/modal-contact"
 
 
 
 export default function DashboardPage() {
-    const { profile, setToken, trigger } = useContext(AuthContext)
-    const router = useRouter()
-    const [contacts, setContacts] = useState<IContactResponse[]>()
-    const { handleContacts } = useRequest()
-    const {entityModal} = useContext(ModalContext)
-    useEffect(() => {
-        const getListContacts = async () => {
-            setContacts(await handleContacts("listAll"))
-        }
-        getListContacts()
-    }, [])
 
+  const { profile, setToken, trigger } = useContext(AuthContext)
+  const router = useRouter()
+  const [contacts, setContacts] = useState<IContactResponse[]>()
+  const { handleContacts } = useRequest()
+  const {entityModal} = useContext(ModalContext)
+  useEffect(() => {
+      const getListContacts = async () => {
+          setContacts(await handleContacts("listAll"))
+      }
+      if(profile){
+
+        getListContacts()
+      }
+  }, [])
     if (!profile) {
-        router.push('/login')
-        return (<h1>Carregando</h1>)
+      if(typeof window !== 'undefined' && window.location){
+        router.push('/')
+      }
+        return <Loading/>
     }
+
+
     return (
       <>
         <Navbar />

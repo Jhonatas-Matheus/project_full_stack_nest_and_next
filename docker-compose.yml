@@ -11,21 +11,12 @@ services:
       interval: 5s
       timeout: 2s
       retries: 5
-
-  migrations:
-    build: ./back-end
-    command: yarn prisma migrate dev --name init
-    depends_on:
-      project_full_stack_db:
-        condition: service_healthy
   
   api:
     build: ./back-end
-    command: yarn start:dev
+    command: sh -c "yarn && yarn prisma migrate dev --name init && yarn build && yarn start " 
     ports:
       - 3005:3000
     depends_on:
       project_full_stack_db:
         condition: service_healthy
-      migrations:
-        condition: service_completed_successfully

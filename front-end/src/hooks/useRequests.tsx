@@ -3,10 +3,10 @@ import { IClientEditRequest, IClientEditResponse, IClienteLogin, IClientRegister
 import { IContactRequest, IContactResponse } from "@/interfaces/contact.interfaces"
 import { api } from "@/services/api"
 import { handleToastfy } from "@/utils/toastfy.helper"
-import axios, { AxiosError } from "axios"
+import { AxiosError } from "axios"
 import { useContext, useState } from "react"
-import { toast } from "react-toastify"
 
+import { setCookie} from 'nookies'
 type TypeRequest = "listAll" | "updateOneById" | "deleteOneById" | "createContact";
 interface IConfigRequest{
     payload?: IContactRequest
@@ -14,12 +14,12 @@ interface IConfigRequest{
 }
 export const useRequest = () => {
     const [loading, setLoading] = useState<boolean>()
-    const { setProfile, setToken, token } = useContext(AuthContext)
+    const { setProfile, setToken, token, profile,trigger, setTrigger } = useContext(AuthContext)
     const hadnleLogin = async (payload: IClienteLogin) => {
         setLoading(true)
         try {
             const response = await api.post('/client/login', payload)
-            localStorage.setItem('project_full_stack:token', response.data.access_token)
+            setCookie(null, "project_full_stack:token", response.data.access_token)
             handleToastfy({ typeToast: "success", text: "Login feito com sucesso" })
             setTimeout(() => {
                 setLoading(false)
@@ -71,7 +71,10 @@ export const useRequest = () => {
     const handleEditProfile = async (payload: IClientEditRequest): Promise<IClientEditResponse | null> =>{
         try {
             const response = await api.patch('/client', payload)
-            handleToastfy({typeToast: 'success', text: 'Perfil editado com sucesso.'})
+            if(Object.keys(payload).length !== 0){
+                handleToastfy({typeToast: 'success', text: 'Perfil editado com sucesso.'})
+            }
+            setTrigger(!trigger)
             return response.data
         } catch (error) {
             handleToastfy({typeToast: 'error', text: 'Ocorreu um erro ao editar seu perfil, tente novamente mais tarde'})
@@ -79,11 +82,18 @@ export const useRequest = () => {
         }
 
     }
+    const handleExcludeProfile = async () =>{
+        await api.delete(`/client/`)
+        setTrigger(!trigger)
+        setCookie(null, "project_full_stack:token", "")
+        handleToastfy({typeToast: "success", text: "Conta excluída com sucesso."})
+    }
     return {
       hadnleLogin,
       loading,
       handleRegister,
       handleContacts,
       handleEditProfile,
+      handleExcludeProfile
     };
 }

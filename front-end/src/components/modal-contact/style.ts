@@ -2,9 +2,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 
-
-
-export const StyledFormEditProfile = styled(motion.form)`
+export const StyledFormEditContact = styled(motion.form)`
 width: 100%;
 height: min-content;
 margin: 0 auto;
@@ -29,12 +27,14 @@ border-radius: 4px;
 }
 input[type="submit"]{
     background-color: #1DBBED !important;
+    cursor: pointer;
     color: #fff;
     font-weight: bold;
 }
 
 `
-export const StyledExcludeProfile = styled(motion.div)`
+
+export const StyledFormExcludeContact = styled(motion.div)`
 width: 100%;
 height: min-content;
 margin: 0 auto;
@@ -58,6 +58,7 @@ h2{
 button{
     background-color: #1DBBED !important;
     padding: 1.3rem;
+    cursor: pointer;
     border-radius: 10px;
     color: #fff;
     font-weight: bold;

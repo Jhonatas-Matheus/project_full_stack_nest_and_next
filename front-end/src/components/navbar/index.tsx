@@ -3,16 +3,18 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useContext, useState } from "react"
 import { AuthContext } from "@/context/AuthContext"
 import { ModalContext } from "@/context/ModalContext"
-
+import { setCookie} from 'nookies'
+import { useRequest } from "@/hooks/useRequests"
 
 
 export const Navbar = () => {
     const [showOptions, setShowOptions] = useState<boolean>(false)
     const { setToken } = useContext(AuthContext)
     const {profile} = useContext(AuthContext)
+    const {handleExcludeProfile:handleExcludeProfileRequest} = useRequest()
     const handleLogout = () =>{
-        localStorage.removeItem('project_full_stack:token')
-        setToken("")
+      setCookie(null, 'project_full_stack:token', "")
+      setToken("")
     }
     const {setShowModal, setTypeModal, setEntityModal} = useContext(ModalContext)
     return (
@@ -66,6 +68,7 @@ export const Navbar = () => {
               setShowModal(true);
               setShowOptions(false);
               setEntityModal("client");
+              // handleExcludeProfile()
             }}
           >
             Excluir Perfil
@@ -115,6 +118,7 @@ export const Navbar = () => {
                       setShowModal(true);
                       setShowOptions(false);
                       setEntityModal("client");
+                      // handleExcludeProfile()
                     }}
                   >
                     <img

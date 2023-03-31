@@ -17,6 +17,9 @@ export const StyledModalGeneric = styled(motion.div)`
     .content{
         position: absolute;
         width: 80%;
+        @media (min-width: 1024px){
+            width: 50%;
+        }
         height: min-content;
         top: 0;
         left: 0;

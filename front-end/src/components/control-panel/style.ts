@@ -37,6 +37,7 @@ input[type="submit"]{
 input[type="button"]{
     margin-top: .5rem;
     background-color: #1DBBED !important;
+    cursor: pointer;
     height: 100%;
     color: #fff;
     font-weight: bold;
